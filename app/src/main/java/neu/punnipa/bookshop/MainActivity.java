@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         private String urlString;
         private boolean statusABoolean = true;
         private String truePasswordString;
+        private String nameLoginSteing;
 
         public MySynchronize(Context context, String urlString) {
             this.context = context;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     if (userString.equals(jsonObject.getString("User"))) {
                         statusABoolean = false;
                         truePasswordString = jsonObject.getString("Password");
+                        nameLoginSteing = jsonObject.getString("Name");
 
                     } // if
 
@@ -97,7 +99,14 @@ public class MainActivity extends AppCompatActivity {
                              "ไม่มี" + userString + "ในฐานข้อมูลของเรา");
                 } else if (passwordString.equals(truePasswordString)) {
                     //Password True
+
+                    Intent intent = new Intent(context, BookActivity.class);
+                    intent.putExtra("Name", nameLoginSteing);
+                    startActivity(intent);
+
+
                     Toast.makeText(context, "Welcome User", Toast.LENGTH_SHORT).show();
+                    finish();
 
                 } else {
                     //Password False
